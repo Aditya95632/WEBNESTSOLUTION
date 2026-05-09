@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webnest Solution - Professional Web Development</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            line-height: 1.7; 
+            color: #2c3e50; 
+            overflow-x: hidden;
+        }
+
+        /* Navigation - Glassmorphism Effect */
+        nav {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(31,38,135,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .logo img { 
+            height: 50px; 
+            margin-right: 12px; 
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(102,126,234,0.3);
+        }
+
+        .logo:hover { transform: scale(1.05); }
+
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102,126,234,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .nav-links a:hover::before { left: 100%; }
+        .nav-links a:hover { 
+            color: #667eea; 
+            background: rgba(102,126,234,0.1);
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-nav {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+        }
+
+        .whatsapp-nav:hover { transform: translateY(-3px) scale(1.05); }
+
+        /* Hero Section - Modern Design */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            padding: 180px 2rem 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .price-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 1.2rem 2.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        .price-button:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .whatsapp-hero {
+            background: linear-gradient(135deg, #25D366, #128C7E) !important;
+            border-color: rgba(37,211,102,0.5) !important;
+        }
+
+        .whatsapp-hero:hover { color: white !important; background: #20ba56 !important; }
+
+        /* Sections */
+        .section { 
+            padding: 120px 2.5rem; 
+            max-width: 1300px; 
+            margin: 0 auto; 
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            position: relative;
+            color: #2c3e50;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); 
+            gap: 2.5rem; 
+        }
+
+        .card {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .card p { color: #64748b; font-size: 1.1rem; }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Portfolio */
+        .portfolio-item { 
+            border-radius: 24px; 
+            overflow: hidden; 
+            height: 280px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+        }
+
+        .portfolio-item img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-item:hover img { transform: scale(1.1); }
+
+        /* Contact Cards */
+        .contact-card i {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Footer */
+        footer { 
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white; 
+            padding: 4rem 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover { color: #feca57; }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float-hero { animation: float 6s ease-in-out infinite; }
+
+        /* Responsive */
+        @media (max-width: 768px) { 
+            .nav-links { 
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(255,255,255,0.98);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                display: none;
+            }
+            .hero h1 { font-size: 2.8rem; }
+            .section { padding: 80px 1.5rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Webnest Solution" onerror="this.src='https://via.placeholder.com/50x50/667eea/ffffff?text=WNS'">
+                <span>Webnest Solution</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="https://wa.me/918595469964?text=Hi%20Webnest!" class="whatsapp-nav">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content float-hero">
+            <h1>Build Stunning Websites That Convert</h1>
+            <p>Professional web development starting at <strong>₹4,999</strong>. Trusted by 500+ businesses across India.</p>
+            <div class="cta-buttons">
+                <a href="pricing.html" class="price-button">
+                    <i class="fas fa-tags"></i> View Pricing
+                </a>
+                <a href="https://wa.me/918595469964?text=Hi!%20I%20need%20a%20professional%20website!" class="price-button whatsapp-hero">
+                    <i class="fab fa-whatsapp"></i> Get Quote Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section reveal">
+        <h2 class="section-title">Our Expert Services</h2>
+        <div class="grid">
+            <div class="card reveal">
+                <i class="fas fa-laptop-code service-icon"></i>
+                <h3>Static Websites</h3>
+                <p>Lightning-fast, SEO-optimized websites perfect for small businesses and portfolios.</p>
+            </div>
+            <div class="card reveal">
+                <i class="fas fa-shopping-cart service-icon"></i>
+                <h3>E-commerce Stores</h3>
+                <p>Complete online stores with payment gateway, inventory & order management.</p>
+            </div>
+            <div class="card reveal">
+                <i class="fas fa-cogs service-icon"></i>
+                <h3>Dynamic Websites</h3>
+                <p>Interactive websites with admin panels, blogs, and custom functionality.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="section" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
+        <h2 class="section-title">Recent Projects</h2>
+        <div class="grid">
+            <div class="portfolio-item reveal">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=300&fit=crop" alt="E-commerce">
+                <div style="position: absolute; top: 20px; right: 20px; background: rgba(255,107,107,0.9); color: white; padding: 0.5rem 1.2rem; border-radius: 20px; font-weight: 600;">E-commerce</div>
+            </div>
+            <div class="portfolio-item reveal">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=300&fit=crop" alt="Restaurant">
+                <div style="position: absolute; top: 20px; right: 20px; background: rgba(78,205,196,0.9); color: white; padding: 0.5rem 1.2rem; border-radius: 20px; font-weight: 600;">Restaurant</div>
+            </div>
+            <div class="portfolio-item reveal">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=300&fit=crop" alt="Portfolio">
+                <div style="position: absolute; top: 20px; right: 20px; background: rgba(254,202,87,0.9); color: #2c3e50; padding: 0.5rem 1.2rem; border-radius: 20px; font-weight: 600;">Portfolio</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section reveal">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="grid">
+            <div class="card reveal">
+                <i class="fas fa-phone contact-card"></i>
+                <h3>Call Us</h3>
+                <p><strong>+91 85954 69964</strong></p>
+                <a href="tel:+918595469964" style="color: #667eea; font-weight: 600;">Call Now</a>
+            </div>
+            <div class="card reveal">
+                <i class="fas fa-envelope contact-card"></i>
+                <h3>Email</h3>
+                <p><strong>adityashukla85954@gmail.com</strong></p>
+                <a href="mailto:adityashukla85954@gmail.com" style="color: #667eea; font-weight: 600;">Send Email</a>
+            </div>
+            <div class="card reveal">
+                <i class="fab fa-whatsapp contact-card"></i>
+                <h3>WhatsApp</h3>
+                <p><strong>+91 85954 69964</strong></p>
+                <a href="https://wa.me/918595469964" style="color: #25D366; font-weight: 600; font-size: 1.2rem;">Chat Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="justify-content: center; margin-bottom: 1.5rem; font-size: 2rem;">
+                <img src="logo.png" alt="Webnest Solution" onerror="this.src='https://via.placeholder.com/50x50/667eea/ffffff?text=WNS'" style="height: 45px;">
+                <span style="color: white; margin-left: 12px;">Webnest Solution</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#portfolio">Portfolio</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <p style="margin-top: 2rem; opacity: 0.8;">© 2024 Webnest Solution. All rights reserved. | Made with ❤️ in India</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255,255,255,0.98)';
+                nav.style.boxShadow = '0 10px 40px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.background = 'rgba(255,255,255,0.95)';
+                nav.style.boxShadow = '0 8px 32px rgba(31,38,135,0.1)';
+            }
+        });
+
+        // Scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // WhatsApp tracking
+        document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+            link.addEventListener('click', () => {
+                gtag?.('event', 'whatsapp_click', {
+                    'event_category': 'engagement',
+                    'event_label': 'WhatsApp Contact'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
